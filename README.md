@@ -21,6 +21,14 @@ var template = require('template-directory');
 template('/tmp/mydir', '/tmp/mynewdir', {variable: 'data'}, {
     name: 'hello'
 });
+
+//if you don't have settings, make sure pass undefined as placeholder
+template('/tmp/mydir', '/tmp/mynewdir', undefined, {
+    name: 'hello'
+});
+
+//if you have neither settings, nor data. Just leave them
+template('/tmp/mydir', '/tmp/mynewdir');
 ```
 
 #### template(source, destination[, settings, data]) ####
