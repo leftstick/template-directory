@@ -39,6 +39,7 @@ Copies recursively the files from source directory to destination directory.
 - Copy file directly if it is binary
 - Templating file if it is text file with [LoDash](http://lodash.com/docs#template)'s templating method
 
+> `settings.clobber` defaults to true, overwrites destination files
 > `settings.templateOptions` is [template-options](https://lodash.com/docs#template) just passed to `_.template`
 > `data` is used to interpolated the text files
 

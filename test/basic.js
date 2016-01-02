@@ -28,6 +28,26 @@ describe('basic test', function() {
         done();
     });
 
+    describe('given an existing file in the destination', function() {
+        beforeEach(function() {
+            fse.ensureFileSync(path.resolve(dest, 'nest', 'nesta.txt'));
+        });
+
+        it('should be overwriten by default', function() {
+            template(src, dest);
+            should(fs.readFileSync(path.resolve(dest, 'nest', 'nesta.txt'), {
+                encoding: 'utf8'
+            })).eql('nestaaa\n', 'not same');
+        });
+
+        it('should be possible to not clobber the destination files', function() {
+            template(src, dest, {}, {clobber: false});
+            should(fs.readFileSync(path.resolve(dest, 'nest', 'nesta.txt'), {
+                encoding: 'utf8'
+            })).eql('', 'not same');
+        });
+    });
+
     afterEach(function() {
         fse.removeSync(dest);
     });

@@ -8,8 +8,21 @@ var log = require('pretty-log');
 var _ = require('lodash');
 var fs = require('fs');
 
+var fileExists = function (file) {
+    try {
+        fs.statSync(file)
+        return true
+    } catch (e) {
+        return false
+    }
+}
+
 var copy = function(source, dest, data, settings) {
-    var localSettings = settings || {}
+    var localSettings = _.merge({clobber: true}, settings);
+
+    if (!localSettings.clobber && fileExists(dest)) {
+        return;
+    }
 
     if (isBinaryFile.sync(source)) {
         fse.copySync(source, dest);
