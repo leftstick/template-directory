@@ -11,7 +11,7 @@ describe('basic test', function() {
     var dest = path.resolve(__dirname, 'ttt');
 
     it('all good', function(done) {
-        template(src, dest, {variable: 'name'});
+        template(src, dest, {}, {templateOptions: {variable: 'name'}});
         should(fs.readFileSync(path.resolve(dest, 'nest', 'nesta.txt'), {
             encoding: 'utf8'
         })).eql('nestaaa\n', 'not same');
@@ -19,8 +19,8 @@ describe('basic test', function() {
     });
 
     it('with variable', function(done) {
-        template(src, dest, {interpolate: /%([\s\S]+?)%/}, {
-            name: 'nanfeng'
+        template(src, dest, {name: 'nanfeng'}, {
+            templateOptions: {interpolate: /%([\s\S]+?)%/}
         });
         should(fs.readFileSync(path.resolve(dest, 'nest', 'nestb.txt'), {
             encoding: 'utf8'

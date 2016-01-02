@@ -8,19 +8,21 @@ var log = require('pretty-log');
 var _ = require('lodash');
 var fs = require('fs');
 
-var copy = function(source, dest, settings, data) {
+var copy = function(source, dest, data, settings) {
+    var localSettings = settings || {}
+
     if (isBinaryFile.sync(source)) {
         fse.copySync(source, dest);
     } else {
         fse.ensureDirSync(path.dirname(dest));
 
         var txt = fs.readFileSync(source, {encoding: 'utf8'});
-        var out = _.template(txt, settings)(data);
+        var out = _.template(txt, localSettings.templateOptions)(data);
         fs.writeFileSync(dest, out, {encoding: 'utf8'});
     }
 };
 
-module.exports = function(source, destination, settings, data) {
+module.exports = function(source, destination, data, settings) {
     var src = source || './';
 
     if (!source) {
@@ -39,6 +41,6 @@ module.exports = function(source, destination, settings, data) {
 
     files.forEach(function(file) {
         var dest = path.join(destination, file);
-        copy(path.join(src, file), dest, settings, data);
+        copy(path.join(src, file), dest, data, settings);
     });
 };
