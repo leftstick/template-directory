@@ -17,12 +17,15 @@ npm install template-directory --save-dev
 ```javascript
 var template = require('template-directory');
 
-template('/tmp/mydir', '/tmp/mynewdir', {variable: 'data'}, {
+template('/tmp/mydir', '/tmp/mynewdir', {
     name: 'hello'
+}, {
+  clobber: false,
+  templateOptions: {variable: 'data'}
 });
 
-//if you don't have settings, make sure pass undefined as placeholder
-template('/tmp/mydir', '/tmp/mynewdir', undefined, {
+//if you don't have settings, you can simply omit it
+template('/tmp/mydir', '/tmp/mynewdir', {
     name: 'hello'
 });
 
@@ -30,15 +33,18 @@ template('/tmp/mydir', '/tmp/mynewdir', undefined, {
 template('/tmp/mydir', '/tmp/mynewdir');
 ```
 
-#### template(source, destination[, settings, data]) ####
+#### template(source, destination[, data, settings]) ####
 
 Copies recursively the files from source directory to destination directory.
 
 - Copy file directly if it is binary
 - Templating file if it is text file with [LoDash](http://lodash.com/docs#template)'s templating method
+- `data` is used to interpolated the text files
 
-> `settings` is [template-options](https://lodash.com/docs#template) just passed to `_.template`  
-> `data` is used to interpolated the text files
+Available settings:
+
+- `clobber`: defaults to true, overwrites destination files
+- `templateOptions` is [template-options](https://lodash.com/docs#template) just passed to `_.template`
 
 ## LICENSE ##
 
