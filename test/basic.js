@@ -1,3 +1,5 @@
+'use strict';
+
 var template = require('../');
 var should = require('should');
 var path = require('path');
@@ -5,13 +7,16 @@ var fse = require('fs-extra');
 var fs = require('fs');
 
 describe('basic test', function() {
-    'use strict';
 
     var src = path.resolve(__dirname, 'tmp');
     var dest = path.resolve(__dirname, 'ttt');
 
     it('all good', function(done) {
-        template(src, dest, {}, {templateOptions: {variable: 'name'}});
+        template(src, dest, {}, {
+            templateOptions: {
+                variable: 'name'
+            }
+        });
         should(fs.readFileSync(path.resolve(dest, 'nest', 'nesta.txt'), {
             encoding: 'utf8'
         })).eql('nestaaa\n', 'not same');
@@ -20,7 +25,9 @@ describe('basic test', function() {
 
     it('with variable', function(done) {
         template(src, dest, {name: 'nanfeng'}, {
-            templateOptions: {interpolate: /%([\s\S]+?)%/}
+            templateOptions: {
+                interpolate: /%([\s\S]+?)%/
+            }
         });
         should(fs.readFileSync(path.resolve(dest, 'nest', 'nestb.txt'), {
             encoding: 'utf8'

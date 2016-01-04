@@ -1,6 +1,6 @@
 {
   "name": "template-directory",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Copies recursively the files from source directory to destination directory with LoDash's templating method.",
   "main": "./index.js",
   "scripts": {
@@ -21,14 +21,14 @@
   },
   "homepage": "https://github.com/leftstick/template-directory#readme",
   "dependencies": {
-    "fs-extra": "^0.24.0",
-    "glob": "^5.0.14",
+    "fs-extra": "^0.26.3",
+    "glob": "^6.0.3",
     "isbinaryfile": "^3.0.0",
     "lodash": "^3.10.1",
     "pretty-log": "^0.1.0"
   },
   "devDependencies": {
-    "mocha": "^2.3.3",
-    "should": "^7.1.0"
+    "mocha": "^2.3.4",
+    "should": "^8.0.2"
   }
 }

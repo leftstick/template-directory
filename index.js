@@ -8,12 +8,11 @@ var log = require('pretty-log');
 var _ = require('lodash');
 var fs = require('fs');
 
-var fileExists = function (file) {
+var fileExists = function(file) {
     try {
-        fs.statSync(file)
-        return true
+        return fs.statSync(file).isFile();
     } catch (e) {
-        return false
+        return false;
     }
 }
 
